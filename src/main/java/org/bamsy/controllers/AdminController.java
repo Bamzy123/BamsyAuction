@@ -22,12 +22,9 @@ public class AdminController {
         this.userRepository = userRepository;
     }
 
-    private void checkAdminAccess(String userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        if (!user.isAdmin()) {
-            throw new AccessDeniedException("Access denied: Admins only");
-        }
+    private void checkAdminAccess(String admin) {
+        User user = (User) userRepository.findByRole(admin);
+        if (!user.isAdmin()) throw new AccessDeniedException("Access denied: Admins only");
     }
 
     @GetMapping("/users")
