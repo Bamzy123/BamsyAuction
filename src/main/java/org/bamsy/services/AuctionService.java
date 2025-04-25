@@ -27,12 +27,9 @@ public class AuctionService {
         Auction auction = new Auction();
         auction.setItemName(req.getItemName());
         auction.setItemDescription(req.getDescription());
-
-//        auction.setItemName(req.getItemName());
-//        auction.setItemDescription(req.getDescription());
-//        auction.setItemStartingDate(req.getEndDate());
-//        auction.setEndingTime(req.getEndingTime());
-//        auction.setStatus("UPCOMING");
-//        auction.setStartingPrice(100_000);
+        auction.setItemStartingDate(req.getStartDate());
+        auction.setItemEndingDate(req.getEndDate());
+        auction.setItemStartingPrice(100_000);
+        auction.setItemStatus("UPCOMING");
     }
 }
