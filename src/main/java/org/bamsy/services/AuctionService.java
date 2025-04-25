@@ -33,5 +33,5 @@ public class AuctionService {
         auction.setItemStatus("UPCOMING");
         auctionRepository.save(auction);
     }
-
+    int
 }
