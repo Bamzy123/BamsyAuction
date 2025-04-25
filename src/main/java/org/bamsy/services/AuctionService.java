@@ -31,5 +31,7 @@ public class AuctionService {
         auction.setItemEndingDate(req.getEndDate());
         auction.setItemStartingPrice(100_000);
         auction.setItemStatus("UPCOMING");
+        auctionRepository.save(auction);
     }
+
 }
