@@ -4,6 +4,7 @@ import org.bamsy.dtos.request.LoginRequest;
 import org.bamsy.dtos.request.RegisterRequest;
 import org.bamsy.dtos.response.LoginResponse;
 import org.bamsy.dtos.response.RegisterResponse;
+import org.bamsy.exceptions.InvalidCredentialException;
 import org.bamsy.models.RegularUser;
 import org.bamsy.models.User;
 import org.bamsy.repositories.UserRepository;
@@ -21,7 +22,7 @@ public class UserService {
     public RegisterResponse register(RegisterRequest req) {
         if (userRepo.findByUserName(req.getUserName()).isPresent())
             throw new IllegalArgumentException("Taken");
-        User user = new RegularUser("1", "stephen", "1234", "admin");         // or new Admin() if role=="ADMIN"
+        User user = new RegularUser("1", "stephen", "1234", "admin");
         user.setUserName(req.getUserName());
         user.setPassword(req.getPassword());
         user.setRole(req.getRole());
@@ -30,10 +31,8 @@ public class UserService {
     }
 
     public LoginResponse login(LoginRequest req) {
-        User u = userRepo.findByUserName(req.getUserName())
-                .filter(user -> user.getPassword().equals(req.getPassword()))
-                .orElseThrow(() -> new IllegalArgumentException("Bad credentials"));
-        return new LoginResponse(u.getUserId(), u.getRole());
+        User users = userRepo.findByUserName(req.getUserName()).filter(user -> user.getPassword().equals(req.getPassword()))
+                .orElseThrow(() -> new InvalidCredentialException("Bad credentials"));
+        return new LoginResponse(users.getUserId(), users.getRole());
     }
 }
-

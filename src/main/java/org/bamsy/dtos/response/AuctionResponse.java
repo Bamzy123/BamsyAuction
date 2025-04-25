@@ -1,20 +1,13 @@
-package org.bamsy.models;
+package org.bamsy.dtos.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@Document(collection = "auction")
-public class Auction {
-    @Id
+public class AuctionResponse {
     private String itemId;
     private String itemName;
     private String itemDescription;
