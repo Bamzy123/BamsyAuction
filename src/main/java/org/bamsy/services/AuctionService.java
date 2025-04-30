@@ -1,7 +1,9 @@
 package org.bamsy.services;
 
 import org.bamsy.dtos.request.CreateAuctionRequest;
+import org.bamsy.dtos.request.PlaceBidRequest;
 import org.bamsy.dtos.response.AuctionResponse;
+import org.bamsy.dtos.response.BidResponse;
 import org.bamsy.models.Auction;
 import org.bamsy.repositories.AuctionRepository;
 import org.bamsy.repositories.BidRepository;
@@ -32,5 +34,8 @@ public class AuctionService {
         auction.setItemStartingPrice(100_000);
         auction.setItemStatus("UPCOMING");
         auctionRepository.save(auction);
+    }
+    public BidResponse placeBid(PlaceBidRequest req) {
+        Auction auction = auctionRepository.findById()
     }
 }
